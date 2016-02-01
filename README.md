@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # python-getting-started
 
 A barebones Python app, which can easily be deployed to Heroku.
@@ -37,3 +38,7 @@ or
 For more information about using Python on Heroku, see these Dev Center articles:
 
 - [Python on Heroku](https://devcenter.heroku.com/categories/python)
+=======
+# PunGenAPI
+API for pungenerator
+>>>>>>> 0f7a49ef49f4cbb07aceddaeb6bfed3e47dbaeab
