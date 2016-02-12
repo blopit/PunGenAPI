@@ -1,44 +1,29 @@
-<<<<<<< HEAD
-# python-getting-started
+# Pun Finder API
 
-A barebones Python app, which can easily be deployed to Heroku.
+## Sources
+Uses truncated version of [The Carnegie Mellon University Pronouncing Dictionary](http://www.speech.cs.cmu.edu/cgi-bin/cmudict)
 
-This application supports the [Getting Started with Python on Heroku](https://devcenter.heroku.com/articles/getting-started-with-python) article - check it out.
+## Method
+//ToDo: expand
 
-## Running Locally
+- Determines the pronounciation array ([AE1, P, AH0, L] for APPLE)
+  - Guesses a pronounciation arry if a word is not found
+    - This is done by segmenting all words into consonant/vowel groups
+    - Consonant sounds are merged and then mapped andmost frequent sound for group of letters is picked
+    - not perfect though...
+    - e.g. a|ft|e|rw|a|rd maps to [AE1, FT, ER0W, ER0D] -> a/AE1, ft/FT, rw/ER0W, a/ER0D, rd/?
+- Matches current word with all other words giving
+  - 1 point per sound perfectly matched
+  - 0.65 points for sound almost matches [AE0, AE1]
+  - 0.35 points for sound barely mathing [AE0, AH0]
+  - 0 points for no match
+- Matches occur two ways since "pun" should return "pencil" AND vice versa
+- Similarity is given as value points recieved by tested word / points received by queried word
+- Ranks based on frequency of word usage and similarity percentage
 
-Make sure you have Python [installed properly](http://install.python-guide.org).  Also, install the [Heroku Toolbelt](https://toolbelt.heroku.com/) and [Postgres](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup).
-
-```sh
-$ git clone git@github.com:heroku/python-getting-started.git
-$ cd python-getting-started
-$ pip install -r requirements.txt
-$ createdb python_getting_started
-$ heroku local:run python manage.py migrate
-$ python manage.py collectstatic
-$ heroku local
-```
-
-Your app should now be running on [localhost:5000](http://localhost:5000/).
-
-## Deploying to Heroku
-
-```sh
-$ heroku create
-$ git push heroku master
-$ heroku run python manage.py migrate
-$ heroku open
-```
-or
-
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-## Documentation
-
-For more information about using Python on Heroku, see these Dev Center articles:
-
-- [Python on Heroku](https://devcenter.heroku.com/categories/python)
-=======
-# PunGenAPI
-API for pungenerator
->>>>>>> 0f7a49ef49f4cbb07aceddaeb6bfed3e47dbaeab
+## Usage
+API endpoint
+https://pungenerator.herokuapp.com/?q=<query>&amount=<amount>&compre=<comprehensive search?>
+- 'q' | string : query
+- 'amount' | integer : amount of results to return
+- 'compre' | boolean : whether to search for more words or not
